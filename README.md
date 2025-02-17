@@ -73,13 +73,8 @@ The model implements style-based generation through a conditioning mechanism:
 - Style transfer is possible by changing the poet token while keeping the same seed text
 
 ## Data Collection
-The poetry data was collected through web scraping from [Rekhta.org](https://rekhta.org), a comprehensive online repository of Urdu poetry. The scraping process and data preprocessing pipeline will be detailed soon in a separate documentation.
+The poetry data was collected through web scraping from [Rekhta.org](https://rekhta.org), a comprehensive online repository of Urdu poetry. For a detailed explanation of the scraping methodology and implementation, check out this blog post: [Preserving the Soul of Urdu Poetry: Scraping Rekhta.org using Selenium and BeautifulSoup](https://saadsohail5104.medium.com/preserving-the-soul-of-urdu-poetry-scraping-rekhta-org-using-selenium-and-beautifulsoup-40403843362e)
 
-**Coming Soon:**
-- Detailed scraping methodology
-- Data cleaning process
-- Dataset statistics
-- Code for the scraping pipeline
 
 ## Dataset
 
