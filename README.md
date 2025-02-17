@@ -2,6 +2,12 @@
 
 A deep learning project that generates Roman Urdu poetry (ghazals) using Gated Recurrent Units (GRU). The system is capable of generating poetry in the style of various famous Urdu poets.
 
+## Live Demo
+Try the live application here: [Urdu Ghazal Generator](https://urdughazalgenerator.streamlit.app/)
+
+## Blog
+Read about the technical details and implementation in this blog post: [Roman Urdu Poetry Text Generation using GRU based on Poet style](https://medium.com/@basil451287/roman-Urdu-poetry-text-generation-using-GRU-based-on-poet-style-23a5b4fbfccb)
+
 ## Features
 
 - Generates Roman Urdu poetry using GRU neural network
@@ -30,14 +36,12 @@ git clone https://github.com/yourusername/GRU-Based-Roman-Urdu-Ghazal-Generation
 cd GRU-Based-Roman-Urdu-Ghazal-Generation
 ```
 
-2. Install required packages:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-1. Run the Streamlit app:
+3. Run the application:
 ```bash
 streamlit run app.py
 ```
@@ -69,13 +73,29 @@ The model implements style-based generation through a conditioning mechanism:
 - The mechanism ensures stylistic consistency while maintaining the poet's unique characteristics
 - Style transfer is possible by changing the poet token while keeping the same seed text
 
+## Data Collection
+The poetry data was collected through web scraping from [Rekhta.org](https://rekhta.org), a comprehensive online repository of Urdu poetry. The scraping process and data preprocessing pipeline will be detailed soon in a separate documentation.
+
+**Coming Soon:**
+- Detailed scraping methodology
+- Data cleaning process
+- Dataset statistics
+- Code for the scraping pipeline
+
 ## Dataset
 
 The model is trained on a curated dataset of Roman Urdu ghazals from various renowned poets including:
 - Mirza Ghalib
-- Faiz Ahmad Faiz
+- Dagh Dehlvi
+- Shakeel Badayuni
 - Ahmad Faraz
-- And others
+- Hasrat Mohani
+- Faiz Ahmad Faiz
+- Jaun Eliya
+- Bashir Badr
+- Shahryar
+- Ahmad Mushtaq
+- Generic
 
 ## Visualization Features
 
@@ -87,18 +107,3 @@ The model is trained on a curated dataset of Roman Urdu ghazals from various ren
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Thanks to all the poets whose works were used in training
-- Special thanks to contributors and dataset providers
-
-## Contact
-
-For queries and suggestions, please open an issue on GitHub.
-
----
