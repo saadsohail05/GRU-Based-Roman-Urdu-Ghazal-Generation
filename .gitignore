@@ -1,0 +1,10 @@
+# Python virtual environment
+myenv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+poetry_generator.pth

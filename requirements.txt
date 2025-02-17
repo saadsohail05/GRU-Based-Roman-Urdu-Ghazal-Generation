@@ -5,3 +5,5 @@ pandas
 plotly
 wordcloud
 seaborn
+requests
+tqdm
