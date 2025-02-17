@@ -32,8 +32,7 @@ Read about the technical details and implementation in this blog post: [Roman Ur
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/GRU-Based-Roman-Urdu-Ghazal-Generation.git
-cd GRU-Based-Roman-Urdu-Ghazal-Generation
+git clone https://github.com/saadsohail05/GRU-Based-Roman-Urdu-Ghazal-Generation.git
 ```
 
 2. Install dependencies:
