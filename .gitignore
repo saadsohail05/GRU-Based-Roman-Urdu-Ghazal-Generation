@@ -8,3 +8,4 @@ __pycache__/
 .env.local
 .env.*.local
 poetry_generator.pth
+.streamlit/secrets.toml

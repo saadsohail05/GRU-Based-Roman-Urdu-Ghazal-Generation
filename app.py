@@ -6,6 +6,7 @@ from collections import Counter
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import seaborn as sns
+import os
 
 # Set page config
 st.set_page_config(
@@ -60,30 +61,51 @@ def create_word_vocab(texts, poet_names):
 
 @st.cache_resource
 def load_model_and_vocab():
-    # Load the dataset to recreate vocabulary
-    df = pd.read_csv('filtered_ghazals.csv')
-    poetry_texts = df['Poetry Text'].tolist()
-    poets = df['Poet'].unique().tolist()
-    word2idx, idx2word, vocab_size = create_word_vocab(poetry_texts, poets)
+    try:
+        # Default URL if secrets are not available
+        default_url = "https://drive.google.com/file/d/14xR_Q2V7QsitWP2kVpCqMS3hS399GHpm/view?usp=drive_link"
+        
+        # Try to get model URL from secrets, use default if not found
+        try:
+            model_url = st.secrets["MODEL_URL"]
+        except (FileNotFoundError, KeyError):
+            model_url = default_url
+            st.warning("Using default model URL as secrets.toml not found")
+        
+        # Download model if not exists
+        if not os.path.exists('poetry_generator.pth'):
+            with st.spinner("Downloading model... Please wait..."):
+                import setup
+                setup.download_model(model_url)
+        
+        # Load the dataset to recreate vocabulary
+        df = pd.read_csv('filtered_ghazals.csv')
+        poetry_texts = df['Poetry Text'].tolist()
+        poets = df['Poet'].unique().tolist()
+        word2idx, idx2word, vocab_size = create_word_vocab(poetry_texts, poets)
 
-    # Load the model configuration
-    checkpoint = torch.load('poetry_generator.pth', map_location=torch.device('cpu'))
-    config = checkpoint['config']
+        # Load the model configuration
+        device = torch.device('cpu')
+        checkpoint = torch.load('poetry_generator.pth', map_location=device)
+        config = checkpoint['config']
 
-    # Initialize the model
-    model = GRU(
-        vocab_size=config['vocab_size'],
-        embedding_dim=config['embedding_dim'],
-        hidden_dim=config['hidden_dim'],
-        num_layers=config['num_layers'],
-        dropout=config['dropout']
-    )
+        # Initialize the model
+        model = GRU(
+            vocab_size=config['vocab_size'],
+            embedding_dim=config['embedding_dim'],
+            hidden_dim=config['hidden_dim'],
+            num_layers=config['num_layers'],
+            dropout=config['dropout']
+        )
 
-    # Load the trained weights
-    model.load_state_dict(checkpoint['model_state_dict'])
-    model.eval()
+        # Load the trained weights
+        model.load_state_dict(checkpoint['model_state_dict'])
+        model.eval()
 
-    return model, word2idx, idx2word, poets
+        return model, word2idx, idx2word, poets
+    except Exception as e:
+        st.error(f"Error loading model: {str(e)}")
+        raise e
 
 def generate_poetry(model, word2idx, idx2word, poet_name, seed_text=None, max_length=100, temperature=0.8, repetition_penalty=1.2):
     # ... existing function code from final.py ...
